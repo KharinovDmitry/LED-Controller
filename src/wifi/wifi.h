@@ -1,0 +1,1 @@
+int connectToWifi(char* ssid, char* password);
