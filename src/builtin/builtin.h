@@ -1,1 +1,1 @@
-void ledPing();
+void ledPing(int dur);

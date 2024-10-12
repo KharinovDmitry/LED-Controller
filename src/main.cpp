@@ -3,6 +3,8 @@
 #include <wifi/wifi.h>
 #include <builtin/builtin.h>
 #include <server/server.h>
+#include <led/led.h>
+
 
 char* ssid = "TP-Link_362C";
 char* password = "16192546";
@@ -30,7 +32,12 @@ void setup() {
   udp.begin(udpServerPort);
   Serial.println("udp server started");
 
-  ledPing();
+  initLED();
+  Serial.println("led inited");
+
+  ledPing(1000);
+
+  setLED(0, 0, 255, 0, 0);
 }
 
 void loop() {

@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
-void ledPing() {
+void ledPing(int dur) {
     digitalWrite(LED_BUILTIN, HIGH);
-    delay(1000);
+    delay(100);
     digitalWrite(LED_BUILTIN, LOW);
-    delay(1000);
+    delay(dur);
     digitalWrite(LED_BUILTIN, HIGH);
 }
