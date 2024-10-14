@@ -12,15 +12,14 @@ class Task {
     short B;
 };
 
-Task parseTaskFromUDP(char data[packet_size_byte + 1]);
+Task parseTaskFromUDP(char data[packet_size_byte]);
 
 void handleUDP(WiFiUDP udp) {
     int packetSize = udp.parsePacket();
     if (packetSize) {
       char incomingPacket[20];
       int len = udp.read(incomingPacket, packet_size_byte + 1);
-      if (len > 0) {
-        incomingPacket[len] = 0;
+      if (len == packet_size_byte) {
         Task req = parseTaskFromUDP(incomingPacket);
         setLED(req.X, req.Y, req.R, req.G, req.B);
       }
@@ -30,11 +29,11 @@ void handleUDP(WiFiUDP udp) {
 Task parseTaskFromUDP(char data[packet_size_byte + 1]) {
     Task task;
 
-    task.X = ((short)data[0] << 8) | (short)data[1];
-    task.Y = ((short)data[2] << 8) | (short)data[3];
-    task.R = (short)data[4]; 
-    task.G = (short)data[5]; 
-    task.B = (short)data[6]; 
+    task.X = ((uint8_t)data[0] << 8) | (uint8_t)data[1];
+    task.Y = ((uint8_t)data[2] << 8) | (uint8_t)data[3];  
+    task.R = (uint8_t)data[4];
+    task.G = (uint8_t)data[5];
+    task.B = (uint8_t)data[6];
     
     return task;
 }

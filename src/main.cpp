@@ -36,8 +36,6 @@ void setup() {
   Serial.println("led inited");
 
   ledPing(1000);
-
-  setLED(0, 0, 255, 0, 0);
 }
 
 void loop() {
