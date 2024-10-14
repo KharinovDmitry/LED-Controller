@@ -1,14 +1,19 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
-#define PIN D3 // Пин, к которому подключен DIN
-#define NUM_PIXELS 256 // Количество пикселей в матрице
+#define PIN D3 
+#define NUM_PIXELS 256 
+#define WIDTH 16 
 
 Adafruit_NeoPixel strip(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
+void setLED(short x, short y, short r, short g, short b);
+
 void initLED() {
     strip.begin();
+    setLED(0, 15, 0, 0, 0);
     strip.show(); 
+    strip.setBrightness(50);
 }
 
 void setLED(short x, short y, short r, short g, short b) {
@@ -24,6 +29,11 @@ void setLED(short x, short y, short r, short g, short b) {
     Serial.print(b, HEX); 
     Serial.println();
 
-    strip.setPixelColor(x * 16 + y, r, g, b);
+    if (x % 2 == 0) {
+        strip.setPixelColor(x * WIDTH + (WIDTH - 1 - y), r, g, b);
+    } else {
+        strip.setPixelColor(x * WIDTH + y, r, g, b);
+    }
+    
     strip.show(); 
 }
