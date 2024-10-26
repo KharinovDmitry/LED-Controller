@@ -4,6 +4,7 @@
 #include <builtin/builtin.h>
 #include <server/server.h>
 #include <led/led.h>
+#include <bluetooth/bluetooth.h>
 
 
 char* ssid = "TP-Link_362C";
@@ -35,9 +36,13 @@ void setup() {
   initLED();
   Serial.println("led inited");
 
+  initBluetooth();
+  Serial.println("bluetooth inited");
+
   ledPing(1000);
 }
 
 void loop() {
+  bluetoothHandle();
   handleUDP(udp);
 }

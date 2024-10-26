@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
-#define PIN D3 
+#define PIN D4 
 #define NUM_PIXELS 256 
 #define WIDTH 16 
 
